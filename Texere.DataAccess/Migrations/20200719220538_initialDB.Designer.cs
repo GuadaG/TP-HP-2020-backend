@@ -10,7 +10,7 @@ using Texere.DataAccess;
 namespace Texere.DataAccess.Migrations
 {
     [DbContext(typeof(TexereDbContext))]
-    [Migration("20200718203337_initialDB")]
+    [Migration("20200719220538_initialDB")]
     partial class initialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,20 +51,20 @@ namespace Texere.DataAccess.Migrations
                         .HasColumnType("nvarchar(15)")
                         .HasMaxLength(15);
 
-                    b.Property<int>("Domicilio")
-                        .HasColumnType("int")
+                    b.Property<string>("Domicilio")
+                        .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
 
-                    b.Property<int>("Email")
-                        .HasColumnType("int")
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
 
-                    b.Property<int>("NombreApellido")
-                        .HasColumnType("int")
+                    b.Property<string>("NombreApellido")
+                        .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int>("Telefono")
-                        .HasColumnType("int")
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
                     b.HasKey("ClienteId");

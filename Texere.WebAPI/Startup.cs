@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Texere.DataAccess;
+using Texere.Service;
+using Texere.Service.Interfaces;
 
 namespace Texere.WebAPI
 {
@@ -30,6 +32,8 @@ namespace Texere.WebAPI
             services.AddControllers();
             var connection = Configuration.GetConnectionString("myconn");
             services.AddDbContext<TexereDbContext>(options => options.UseSqlServer(connection));
+
+            services.AddTransient<IClientesService, ClientesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

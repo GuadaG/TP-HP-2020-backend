@@ -28,10 +28,10 @@ namespace Texere.DataAccess.Migrations
                     ClienteId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DniCuit = table.Column<string>(maxLength: 15, nullable: true),
-                    NombreApellido = table.Column<int>(maxLength: 50, nullable: false),
-                    Telefono = table.Column<int>(maxLength: 20, nullable: false),
-                    Email = table.Column<int>(maxLength: 30, nullable: false),
-                    Domicilio = table.Column<int>(maxLength: 30, nullable: false)
+                    NombreApellido = table.Column<string>(maxLength: 50, nullable: true),
+                    Telefono = table.Column<string>(maxLength: 20, nullable: true),
+                    Email = table.Column<string>(maxLength: 30, nullable: true),
+                    Domicilio = table.Column<string>(maxLength: 30, nullable: true)
                 },
                 constraints: table =>
                 {

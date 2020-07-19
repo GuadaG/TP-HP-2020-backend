@@ -14,16 +14,16 @@ namespace Texere.Model
         public string DniCuit { get; set; }
 
         [StringLength(50)]
-        public int NombreApellido { get; set; }
+        public string NombreApellido { get; set; }
 
         [StringLength(20)]
-        public int Telefono { get; set; }
+        public string Telefono { get; set; }
 
         [StringLength(30)]
-        public int Email { get; set; }
+        public string Email { get; set; }
 
         [StringLength(30)]
-        public int Domicilio { get; set; }
+        public string Domicilio { get; set; }
 
         public virtual ICollection<Pedidos> Pedidos { get; set; }
     }

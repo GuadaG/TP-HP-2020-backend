@@ -6,10 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Texere.DataAccess\Texere.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Texere.Services\Texere.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>
