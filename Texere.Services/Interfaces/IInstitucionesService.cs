@@ -7,10 +7,10 @@ namespace Texere.Service.Interfaces
 {
     public interface IInstitucionesService
     {
-        bool Add(Institucion model);
+        bool Add(Instituciones model);
         bool Delete(int id);
-        bool Update(Institucion model);
-        Institucion Get(int id);
-        IEnumerable<Institucion> GetAll();
+        bool Update(Instituciones model);
+        Instituciones Get(int id);
+        IEnumerable<Instituciones> GetAll();
     }
 }

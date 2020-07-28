@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Texere.Model
 {
-    public class Institucion
+    public class Instituciones
     {
         [Key]
         public int InstitucionId { get; set; }

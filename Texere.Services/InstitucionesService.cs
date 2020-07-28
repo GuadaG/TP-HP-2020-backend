@@ -17,7 +17,7 @@ namespace Texere.Service
             _texereDbContext = texereDbContext;
         }
 
-        public bool Add(Institucion model)
+        public bool Add(Instituciones model)
         {
             throw new NotImplementedException();
         }
@@ -27,19 +27,19 @@ namespace Texere.Service
             throw new NotImplementedException();
         }
 
-        public bool Update(Institucion model)
+        public bool Update(Instituciones model)
         {
             throw new NotImplementedException();
         }
 
-        public Institucion Get(int id)
+        public Instituciones Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Institucion> GetAll()
+        public IEnumerable<Instituciones> GetAll()
         {
-            var result = new List<Institucion>();
+            var result = new List<Instituciones>();
 
             try
             {
