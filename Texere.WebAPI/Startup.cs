@@ -35,6 +35,7 @@ namespace Texere.WebAPI
 
             services.AddTransient<IClientesService, ClientesService>();
             services.AddTransient<IColoresService, ColoresService>();
+            services.AddTransient<IInstitucionesService, InstitucionesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
