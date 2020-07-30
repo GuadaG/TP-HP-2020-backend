@@ -34,6 +34,7 @@ namespace Texere.WebAPI
             services.AddDbContext<TexereDbContext>(options => options.UseSqlServer(connection));
 
             services.AddTransient<IClientesService, ClientesService>();
+            services.AddTransient<IColoresService, ColoresService>();
             services.AddTransient<IInstitucionesService, InstitucionesService>();
         }
 
