@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace Texere.Model
 {
-    public class Accesorios
+    public class Talles
     {
         [Key]
-        public int AccesorioId { get; set; }
+        public int TalleId { get; set; }
 
         [StringLength(20)]
-        public string DescAccesorio { get; set; }
+        public string DescTalle { get; set; }
 
-        public bool TieneTalle { get; set; }
-
-        public virtual ICollection<PrecioAccesorio> HistoricoPrecio { get; set; }
+        public int Medida { get; set; }
 
         public virtual ICollection<LineaPedido> LineaPedidos { get; set; }
     }

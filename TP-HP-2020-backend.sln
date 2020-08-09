@@ -9,7 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Texere.Model", "Texere.Mode
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Texere.DataAccess", "Texere.DataAccess\Texere.DataAccess.csproj", "{D2D903F0-AE24-4617-939F-81793F0A8C8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texere.Service", "Texere.Services\Texere.Service.csproj", "{AE663BA9-B3B7-470C-A2D1-8FFE13A8A3AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Texere.Service", "Texere.Services\Texere.Service.csproj", "{AE663BA9-B3B7-470C-A2D1-8FFE13A8A3AE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D2D903F0-AE24-4617-939F-81793F0A8C8E} = {D2D903F0-AE24-4617-939F-81793F0A8C8E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

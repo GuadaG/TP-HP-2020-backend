@@ -33,7 +33,23 @@ namespace Texere.WebAPI
             var connection = Configuration.GetConnectionString("myconn");
             services.AddDbContext<TexereDbContext>(options => options.UseSqlServer(connection));
 
-            services.AddTransient<IClientesService, ClientesService>();
+            services.AddTransient<IClientesService, ClientesService>(); 
+           
+            services.AddTransient<ITallesService, TallesService>();
+            
+            services.AddTransient<IAccesoriosService, AccesoriosService>();
+            
+            services.AddTransient<IModelosService, ModelosService>();
+            
+            services.AddTransient<IPedidosService, PedidosService>();
+            
+            services.AddTransient<IMaterialesService, MaterialesService>();
+            
+            services.AddTransient<ILineaPedidoService, LineaPedidoService>();
+            
+            services.AddTransient<IPrecioAccesorioService, PrecioAccesorioService>();
+
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

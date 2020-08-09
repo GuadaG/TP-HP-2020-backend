@@ -4,8 +4,7 @@ using System.Text;
 using Texere.Model;
 
 namespace Texere.Service.Interfaces
-{
-    public interface IClientesService
+{   public interface IClientesService
     {
         IEnumerable<Clientes> GetAll();
         bool Add(Clientes model);

@@ -16,5 +16,12 @@ namespace Texere.DataAccess
         public DbSet<Clientes> Clientes { get; set; }
         public DbSet<Pedidos> Pedidos { get; set; }
         public DbSet<PrecioAccesorio> PrecioAccesorio { get; set; }
-    }
+        public DbSet<Talles> Talles { get; set; }
+        public DbSet<Modelos> Modelos { get; set; }
+        public DbSet<Materiales>  Materiales { get; set; }
+        public DbSet<LineaPedido> LineaPedido { get; set; }
+       
+        //public DbSet<Colores> Colores { get; set; }
+        //public DbSet<Instituciones> Instituciones { get; set; }
+}
 }
