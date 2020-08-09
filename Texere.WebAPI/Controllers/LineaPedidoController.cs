@@ -12,9 +12,9 @@ namespace Texere.WebAPI.Controllers
     [ApiController]
     public class LineaPedidoController : ControllerBase
     {
-        private readonly ILineaPedidoService _lineaPedidoService;
+        private readonly ILineasPedidoService _lineaPedidoService;
 
-        public LineaPedidoController(ILineaPedidoService lineaPedidoService)
+        public LineaPedidoController(ILineasPedidoService lineaPedidoService)
         {
             _lineaPedidoService = lineaPedidoService;
         }

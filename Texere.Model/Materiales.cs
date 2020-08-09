@@ -13,6 +13,6 @@ namespace Texere.Model
         [StringLength(20)]
         public string DescMaterial { get; set; }
 
-        public virtual ICollection<LineaPedido> LineaPedidos { get; set; }
+        public virtual ICollection<LineasPedido> LineasPedido { get; set; }
     }
 }

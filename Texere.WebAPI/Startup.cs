@@ -45,11 +45,9 @@ namespace Texere.WebAPI
             
             services.AddTransient<IMaterialesService, MaterialesService>();
             
-            services.AddTransient<ILineaPedidoService, LineaPedidoService>();
+            services.AddTransient<ILineasPedidoService, LineasPedidoService>();
             
-            services.AddTransient<IPrecioAccesorioService, PrecioAccesorioService>();
-
-          
+            services.AddTransient<IPrecioAccesorioService, PrecioAccesorioService>();       
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

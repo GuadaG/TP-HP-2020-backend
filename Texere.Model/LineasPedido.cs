@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Texere.Model
 {
-	public class LineaPedido
+	public class LineasPedido
 	{
 		[Key]
 		public int LineaPedidoId { get; set; }
@@ -31,14 +31,11 @@ namespace Texere.Model
 
 
 	}
+	//public enum Estados
+	//{
+	//	Pendiente = 0,
+	//	EnCurso = 1,
+	//	Finalizado = 2,
+	//	Cancelado = 3
+	//}
 }	
-	public enum Estados
-	{
-		Pendiente = 0,
-		EnCurso = 1,
-		Finalizado = 2,
-		Cancelado = 3
-	}
-
-
-

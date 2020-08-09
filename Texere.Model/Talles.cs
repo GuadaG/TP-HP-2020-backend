@@ -15,6 +15,6 @@ namespace Texere.Model
 
         public int Medida { get; set; }
 
-        public virtual ICollection<LineaPedido> LineaPedidos { get; set; }
+        public virtual ICollection<LineasPedido> LineasPedido { get; set; }
     }
 }

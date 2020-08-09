@@ -16,6 +16,6 @@ namespace Texere.Model
 
         public virtual ICollection<PrecioAccesorio> HistoricoPrecio { get; set; }
 
-        public virtual ICollection<LineaPedido> LineaPedidos { get; set; }
+        public virtual ICollection<LineasPedido> LineasPedido { get; set; }
     }
 }

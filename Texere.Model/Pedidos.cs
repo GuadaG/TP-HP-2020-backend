@@ -15,13 +15,14 @@ namespace Texere.Model
         public int ClienteId { get; set; }
         public virtual Clientes Cliente { get; set; }
 
-        public virtual ICollection<LineaPedido> LineaPedido { get; set; }
+        public virtual ICollection<LineasPedido> LineasPedido { get; set; }
     }
 
-    //public enum Estados
-    //{   Pendiente = 0,
-    //    EnCurso = 1,
-    //    Finalizado = 2,
-    //    Cancelado = 3
-    //}
+    public enum Estados
+    {
+        Pendiente = 0,
+        EnCurso = 1,
+        Finalizado = 2,
+        Cancelado = 3
+    }
 }

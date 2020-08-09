@@ -15,7 +15,7 @@ namespace Texere.Model
 
         // falta la imagen
 
-        public virtual ICollection<LineaPedido> LineaPedidos { get; set; }
+        public virtual ICollection<LineasPedido> LineasPedido { get; set; }
 
         //  public virtual ICollection<Instituciones> Instituciones { get; set; }
         //  public virtual ICollection<Colores> Colores { get; set; }

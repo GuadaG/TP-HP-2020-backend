@@ -19,7 +19,17 @@ namespace Texere.Service
 
         public bool Add(Clientes model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _texereDbContext.Add(model);
+                _texereDbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool Delete(int id)
@@ -29,7 +39,18 @@ namespace Texere.Service
 
         public Clientes Get(int id)
         {
-            throw new NotImplementedException();
+            var result = new Clientes();
+
+            try
+            {
+                result = _texereDbContext.Clientes.Single(c => c.ClienteId == id);
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return result;
         }
 
         public IEnumerable<Clientes> GetAll()
@@ -40,7 +61,7 @@ namespace Texere.Service
             {
                 result = _texereDbContext.Clientes.ToList();
             }
-            catch (System.Exception)
+            catch (Exception e)
             {
 
             }

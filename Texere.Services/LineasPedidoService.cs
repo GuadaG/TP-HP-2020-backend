@@ -9,24 +9,24 @@ using Texere.Service.Interfaces;
 
 namespace Texere.Service
 {
-    public class LineaPedidoService : ILineaPedidoService
+    public class LineasPedidoService : ILineasPedidoService
     {
         private readonly TexereDbContext _texereDbContext;
 
-        public LineaPedidoService(
+        public LineasPedidoService(
             TexereDbContext texereDbContext
         )
         {
             _texereDbContext = texereDbContext;
         }
 
-        public IEnumerable<LineaPedido> GetAll()
+        public IEnumerable<LineasPedido> GetAll()
         {
-            var result = new List<LineaPedido>();
+            var result = new List<LineasPedido>();
 
             try
             {
-                result = _texereDbContext.LineaPedido.ToList();
+                result = _texereDbContext.LineasPedido.ToList();
             }
             catch (System.Exception)
             {
@@ -36,13 +36,13 @@ namespace Texere.Service
             return result;
         }
 
-        public LineaPedido Get(int id)
+        public LineasPedido Get(int id)
         {
-            var result = new LineaPedido();
+            var result = new LineasPedido();
 
             try
             {
-                result = _texereDbContext.LineaPedido.Single(x => x.LineaPedidoId == id);
+                result = _texereDbContext.LineasPedido.Single(x => x.LineaPedidoId == id);
             }
             catch (System.Exception)
             {
@@ -52,7 +52,7 @@ namespace Texere.Service
             return result;
         }
 
-        public bool Add(LineaPedido model)
+        public bool Add(LineasPedido model)
         {
             try
             {
@@ -67,11 +67,11 @@ namespace Texere.Service
             return true;
         }
 
-        public bool Update(LineaPedido model)
+        public bool Update(LineasPedido model)
         {
             try
             {
-                var originalModel = _texereDbContext.LineaPedido.Single(x =>
+                var originalModel = _texereDbContext.LineasPedido.Single(x =>
                     x.LineaPedidoId == model.LineaPedidoId
                 );
 
@@ -94,7 +94,7 @@ namespace Texere.Service
         {
             try
             {
-                _texereDbContext.Entry(new LineaPedido { LineaPedidoId = id }).State = EntityState.Deleted; ;
+                _texereDbContext.Entry(new LineasPedido { LineaPedidoId = id }).State = EntityState.Deleted; ;
                 _texereDbContext.SaveChanges();
             }
             catch (System.Exception)
