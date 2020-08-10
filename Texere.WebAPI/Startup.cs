@@ -31,23 +31,18 @@ namespace Texere.WebAPI
         {
             services.AddControllers();
             var connection = Configuration.GetConnectionString("myconn");
-            services.AddDbContext<TexereDbContext>(options => options.UseSqlServer(connection));
 
-            services.AddTransient<IClientesService, ClientesService>(); 
-           
-            services.AddTransient<ITallesService, TallesService>();
+            services.AddDbContext<TexereDbContext>(options => options.UseSqlServer(connection));           
             
-            services.AddTransient<IAccesoriosService, AccesoriosService>();
-            
-            services.AddTransient<IModelosService, ModelosService>();
-            
-            services.AddTransient<IPedidosService, PedidosService>();
-            
-            services.AddTransient<IMaterialesService, MaterialesService>();
-            
-            services.AddTransient<ILineasPedidoService, LineasPedidoService>();
-            
-            services.AddTransient<IPrecioAccesorioService, PrecioAccesorioService>();       
+            services.AddTransient<ITallesService, TallesService>();           
+            services.AddTransient<IAccesoriosService, AccesoriosService>();           
+            services.AddTransient<IModelosService, ModelosService>();            
+            services.AddTransient<IPedidosService, PedidosService>();           
+            services.AddTransient<IMaterialesService, MaterialesService>();         
+            services.AddTransient<ILineasPedidoService, LineasPedidoService>();          
+            services.AddTransient<IPrecioAccesorioService, PrecioAccesorioService>();
+            services.AddTransient<IColoresService, ColoresService>();
+            services.AddTransient<IInstitucionesService, InstitucionesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +52,8 @@ namespace Texere.WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("AllowSpecificOrigin");
 
             app.UseHttpsRedirection();
 
