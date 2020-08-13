@@ -17,8 +17,8 @@ namespace Texere.Model
 
         public virtual ICollection<LineasPedido> LineasPedido { get; set; }
 
-        //  public virtual ICollection<Instituciones> Instituciones { get; set; }
-        //  public virtual ICollection<Colores> Colores { get; set; }
+        public virtual ICollection<Instituciones> Instituciones { get; set; }
+        public virtual ICollection<ColoresModelos> ColoresModelos { get; set; }
 
     }
 }

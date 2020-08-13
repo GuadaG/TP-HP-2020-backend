@@ -10,5 +10,8 @@ namespace Texere.Model
 
         [StringLength(20)]
         public string Descripcion { get; set; }
+
+        public int ModeloId { get; set; }
+        public virtual Modelos Modelo { get; set; }
     }
 }

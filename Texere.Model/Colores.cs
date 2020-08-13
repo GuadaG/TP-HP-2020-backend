@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Texere.Model
@@ -10,5 +12,7 @@ namespace Texere.Model
 
         [StringLength(20)]
         public string Descripcion { get; set; }
+
+        public ICollection<ColoresModelos> ColoresModelos { get; set; }
     }
 }
