@@ -33,8 +33,24 @@ namespace Texere.WebAPI
             var connection = Configuration.GetConnectionString("myconn");
             services.AddDbContext<TexereDbContext>(options => options.UseSqlServer(connection));
 
-            services.AddTransient<IClientesService, ClientesService>();
+            services.AddTransient<IClientesService, ClientesService>(); 
+           
+            services.AddTransient<ITallesService, TallesService>();
+            
+            services.AddTransient<IAccesoriosService, AccesoriosService>();
+            
+            services.AddTransient<IModelosService, ModelosService>();
+            
+            services.AddTransient<IPedidosService, PedidosService>();
+            
+            services.AddTransient<IMaterialesService, MaterialesService>();
+            
+            services.AddTransient<ILineasPedidoService, LineasPedidoService>();
+            
+            services.AddTransient<IPrecioAccesorioService, PrecioAccesorioService>();       
+            
             services.AddTransient<IColoresService, ColoresService>();
+            
             services.AddTransient<IInstitucionesService, InstitucionesService>();
 
             services.AddCors(options =>

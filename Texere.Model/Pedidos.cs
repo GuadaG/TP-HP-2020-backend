@@ -11,9 +11,11 @@ namespace Texere.Model
         public int PedidoId { get; set; }
         public DateTime Fecha { get; set; }
         public Estados Estado { get; set; }
+        
         public int ClienteId { get; set; }
-
         public virtual Clientes Cliente { get; set; }
+
+        public virtual ICollection<LineasPedido> LineasPedido { get; set; }
     }
 
     public enum Estados
