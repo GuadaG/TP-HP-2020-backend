@@ -27,7 +27,7 @@ namespace Texere.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ColoresModelos>()
-            .HasKey(cm => new { cm.ColorId, cm.ModeloId });
+                .HasKey(cm => new { cm.ColorId, cm.ModeloId });
             modelBuilder.Entity<ColoresModelos>()
                 .HasOne(cm => cm.Modelos)
                 .WithMany(m => m.ColoresModelos)
@@ -36,6 +36,65 @@ namespace Texere.DataAccess
                 .HasOne(cm => cm.Colores)
                 .WithMany(c => c.ColoresModelos)
                 .HasForeignKey(cm => cm.ColorId);
+
+            #region Seed
+            modelBuilder.Entity<Accesorios>().HasData(
+                new Accesorios
+                {
+                    AccesorioId = 1,
+                    DescAccesorio = "Cuello",
+                    TieneTalle = true
+                },
+                new Accesorios
+                {
+                    AccesorioId = 2,
+                    DescAccesorio = "Puño",
+                    TieneTalle = false
+                },
+                new Accesorios
+                {
+                    AccesorioId = 3,
+                    DescAccesorio = "Cintura",
+                    TieneTalle = false
+                }
+            );
+
+            modelBuilder.Entity<Colores>().HasData(
+                new Colores
+                {
+                    ColorId = 1,
+                    Descripcion = "Blanco"
+                },
+                new Colores
+                {
+                    ColorId = 2,
+                    Descripcion = "Verde"
+                },
+                new Colores
+                {
+                    ColorId = 3,
+                    Descripcion = "Rojo"
+                }
+            );
+
+            modelBuilder.Entity<Materiales>().HasData(
+                new Materiales
+                {
+                    MaterialId = 1,
+                    DescMaterial = "Algodón"
+                },
+                new Materiales
+                {
+                    MaterialId = 2,
+                    DescMaterial = "Poliéster"
+                },
+                new Materiales
+                {
+                    MaterialId = 3,
+                    DescMaterial = "Acrílico"
+                }
+            );
+            #endregion Seed
         }
     }
 }
