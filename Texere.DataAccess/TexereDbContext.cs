@@ -520,6 +520,36 @@ namespace Texere.DataAccess
                     Descripcion = "Colegio Verbo Encarnado"
                 }
             );
+
+            modelBuilder.Entity<Clientes>().HasData(
+                new Clientes
+                {
+                    ClienteId = 1,
+                    DniCuit = "111111",
+                    NombreApellido = "Nazareno Ortiz",
+                    Domicilio = "Mitre 587",
+                    Email = "nortiz@gmail.com",
+                    Telefono = "48756632"
+                },
+                new Clientes
+                {
+                    ClienteId = 2,
+                    DniCuit = "222222",
+                    NombreApellido = "Adrián Olivo",
+                    Domicilio = "Corrientes 2150",
+                    Email = "aolivo@gmail.com",
+                    Telefono = "43215874"
+                },
+                new Clientes
+                {
+                    ClienteId = 3,
+                    DniCuit = "333333",
+                    NombreApellido = "Melina Juarez",
+                    Domicilio = "Pellegrini 1243",
+                    Email = "mjuarez@gmail.com",
+                    Telefono = "43658740"
+                }
+            );
             #endregion Seed
         }
     }
