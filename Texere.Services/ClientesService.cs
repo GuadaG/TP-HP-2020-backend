@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Text;
 using Texere.DataAccess;
 using Texere.Model;
 using Texere.Service.Interfaces;
@@ -26,6 +25,7 @@ namespace Texere.Service
             }
             catch (Exception e)
             {
+                //TODO - agregar msj error tipo -> String.Format("Ha ocurrido la siguiente excepción: {0}", e.Message);
                 return false;
             }
 
@@ -34,7 +34,17 @@ namespace Texere.Service
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _texereDbContext.Entry(new Clientes { ClienteId = id }).State = EntityState.Deleted;
+                _texereDbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public Clientes Get(int id)
@@ -71,7 +81,27 @@ namespace Texere.Service
 
         public bool Update(Clientes model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var originalModel = _texereDbContext.Clientes.Single(x =>
+                    x.ClienteId == model.ClienteId
+                );
+
+                originalModel.DniCuit = model.DniCuit;
+                originalModel.Email = model.Email;
+                originalModel.Domicilio = model.Domicilio;
+                originalModel.Telefono = model.Telefono;
+                originalModel.NombreApellido = model.NombreApellido;
+
+                _texereDbContext.Update(originalModel);
+                _texereDbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
