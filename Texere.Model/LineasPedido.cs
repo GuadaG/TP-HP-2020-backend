@@ -18,7 +18,7 @@ namespace Texere.Model
 		public int PedidoId { get; set; }
 
 		public virtual Talles Talle { get; set; }
-		public int TalleId { get; set; }
+		public int? TalleId { get; set; }
 
 		public virtual Accesorios Accesorio { get; set; }
 		public int AccesorioId { get; set; }
