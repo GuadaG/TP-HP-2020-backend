@@ -8,10 +8,10 @@ namespace Texere.Model
         [Key]
         public int InstitucionId { get; set; }
 
-        [StringLength(20)]
+        [StringLength(60)]
         public string Descripcion { get; set; }
 
-        public int ModeloId { get; set; }
+        public int? ModeloId { get; set; }
         public virtual Modelos Modelo { get; set; }
     }
 }
