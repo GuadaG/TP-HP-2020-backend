@@ -37,7 +37,23 @@ namespace Texere.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                return NotFound(String.Format("Ha ocurrido la siguiente excepción: {0}", ex.Message));
+            }
+
+            return Ok(item);
+        }
+
+        [HttpGet("GetByDni/{dni}")]
+        public IActionResult GetByDni(string dni)
+        {
+            Clientes item;
+            try
+            {
+                item = _clientesService.GetByDni(dni);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(String.Format("Ha ocurrido la siguiente excepción: {0}", ex.Message));
             }
 
             return Ok(item);
@@ -73,7 +89,7 @@ namespace Texere.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                return NotFound(String.Format("Ha ocurrido la siguiente excepción: {0}", ex.Message));
             }
            
             return NoContent();

@@ -59,6 +59,18 @@ namespace Texere.Service
             return result;
         }
 
+        public Clientes GetByDni(string dni)
+        {
+            var result = _texereDbContext.Clientes.Where(c => c.DniCuit == dni).FirstOrDefault();
+
+            if (result == null)
+            {
+                throw new Exception(string.Format("{0} - Cliente no encontrado", System.Net.HttpStatusCode.NotFound));
+            }
+
+            return result;
+        }
+
         public IEnumerable<Clientes> GetAll()
         {
             var result = _texereDbContext.Clientes.ToList();

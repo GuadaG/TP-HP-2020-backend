@@ -11,5 +11,6 @@ namespace Texere.Service.Interfaces
         bool Delete(int id);
         bool Update(Clientes model);
         Clientes Get(int id);
+        Clientes GetByDni(string dni);
     }
 }
