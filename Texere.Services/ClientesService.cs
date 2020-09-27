@@ -49,15 +49,11 @@ namespace Texere.Service
 
         public Clientes Get(int id)
         {
-            var result = new Clientes();
+            var result = _texereDbContext.Clientes.Where(c => c.ClienteId == id).FirstOrDefault();
 
-            try
+            if(result == null)
             {
-                result = _texereDbContext.Clientes.Single(c => c.ClienteId == id);
-            }
-            catch (Exception e)
-            {
-
+                throw new Exception(string.Format("{0} - Cliente no encontrado", System.Net.HttpStatusCode.NotFound));
             }
 
             return result;
@@ -65,16 +61,7 @@ namespace Texere.Service
 
         public IEnumerable<Clientes> GetAll()
         {
-            var result = new List<Clientes>();
-
-            try
-            {
-                result = _texereDbContext.Clientes.ToList();
-            }
-            catch (Exception e)
-            {
-
-            }
+            var result = _texereDbContext.Clientes.ToList();
 
             return result;
         }

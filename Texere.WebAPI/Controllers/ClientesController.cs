@@ -27,14 +27,17 @@ namespace Texere.WebAPI.Controllers
             );
         }
 
-        // GET api/values
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var item = _clientesService.Get(id);
-            if (item == null)
+            Clientes item;
+            try
             {
-                return NotFound();
+                item = _clientesService.Get(id);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
             }
 
             return Ok(item);
