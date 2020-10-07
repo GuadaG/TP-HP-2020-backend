@@ -27,6 +27,18 @@ namespace Texere.WebAPI.Controllers
                 _pedidosService.GetAll()
             );
         }
+
+        [HttpGet("GetByCliente/{clienteId}")]
+        public IActionResult Get(int clienteId)
+        {
+            var item = _pedidosService.GetByCliente(clienteId);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(item);
+        }
     }
 }
 

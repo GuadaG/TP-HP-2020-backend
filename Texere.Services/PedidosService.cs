@@ -36,6 +36,16 @@ namespace Texere.Service
             return result;
         }
 
+        public IEnumerable<Pedidos> GetByCliente(int clienteId)
+        {
+            var result = _texereDbContext.Pedidos.Where(p => p.ClienteId == clienteId).ToList();
+            //foreach (var item in result)
+            //{
+            //    item.Total = 
+            //}
+            return result;
+        }
+
         public Pedidos Get(int id)
         {
             var result = new Pedidos();

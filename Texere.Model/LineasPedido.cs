@@ -13,6 +13,7 @@ namespace Texere.Model
 		public Estados Estado { get; set; }
 		[StringLength(50)]
 		public string Observaciones { get; set; }
+		//public float? TotalLinea { get; set; }
 
 		public virtual Pedidos Pedido { get; set; }
 		public int PedidoId { get; set; }
@@ -28,14 +29,5 @@ namespace Texere.Model
 
 		public virtual Modelos Modelo { get; set; }
 		public int ModeloId { get; set; }
-
-
 	}
-	//public enum Estados
-	//{
-	//	Pendiente = 0,
-	//	EnCurso = 1,
-	//	Finalizado = 2,
-	//	Cancelado = 3
-	//}
 }	

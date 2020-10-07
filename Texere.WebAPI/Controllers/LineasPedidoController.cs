@@ -10,22 +10,25 @@ namespace Texere.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LineaPedidoController : ControllerBase
+    public class LineasPedidoController : ControllerBase
     {
         private readonly ILineasPedidoService _lineaPedidoService;
 
-        public LineaPedidoController(ILineasPedidoService lineaPedidoService)
+        public LineasPedidoController(ILineasPedidoService lineaPedidoService)
         {
             _lineaPedidoService = lineaPedidoService;
         }
 
         // GET api/values
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("{pedidoId}")]
+        public IActionResult Get(int pedidoId)
         {
-            return Ok(
-                _lineaPedidoService.GetAll()
-            );
+            var list = _lineaPedidoService.GetAll(pedidoId);
+            if (list == null)
+            {
+                return NotFound();
+            }
+            return Ok(list);
         }
     }
 }
