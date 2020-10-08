@@ -27,10 +27,10 @@ namespace Texere.Service
             try
             {
                 result = _texereDbContext.LineasPedido
-                    //.Include(lp => lp.Talle)
-                    //.Include(lp => lp.Accesorio)
-                    //.Include(lp => lp.Material)
-                    //.Include(lp => lp.Modelo)
+                    .Include(lp => lp.Talle)
+                    .Include(lp => lp.Accesorio)
+                    .Include(lp => lp.Material)
+                    .Include(lp => lp.Modelo)
                     .Where(lp => lp.PedidoId == pedidoId).ToList();
             }
             catch (Exception)
