@@ -26,7 +26,9 @@ namespace Texere.Service
 
             try
             {
-                result = _texereDbContext.Pedidos.ToList();
+                result = _texereDbContext.Pedidos
+                    .Include(p => p.Estado)
+                    .ToList();
             }
             catch (System.Exception)
             {

@@ -31,6 +31,7 @@ namespace Texere.Service
                     .Include(lp => lp.Accesorio)
                     .Include(lp => lp.Material)
                     .Include(lp => lp.Modelo)
+                    .Include(lp => lp.Estado)
                     .Where(lp => lp.PedidoId == pedidoId).ToList();
             }
             catch (Exception)

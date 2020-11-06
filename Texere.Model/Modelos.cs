@@ -13,7 +13,7 @@ namespace Texere.Model
         [StringLength(20)]
         public string DescModelo { get; set; }
 
-        // falta la imagen
+        public byte[] Imagen { get; set; }
 
         public virtual ICollection<LineasPedido> LineasPedido { get; set; }
 
