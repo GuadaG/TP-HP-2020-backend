@@ -50,13 +50,16 @@ namespace Texere.WebAPI.Controllers
         [HttpGet("GetByCliente/{clienteId}")]
         public IActionResult Get(int clienteId)
         {
-            var item = _pedidosService.GetByCliente(clienteId);
-            if (item == null)
+            var lista = _mapper.Map<IEnumerable<PedidosDTO>>(_pedidosService.GetByCliente(clienteId));
+            if (lista == null)
             {
                 return NotFound();
             }
-
-            return Ok(item);
+            foreach (var item in lista)
+            {
+                item.Total = CalcularTotal(item.PedidoId, item.Fecha);
+            }
+            return Ok(lista);
         }
 
         private float CalcularTotal(int pedidoId, DateTime fecha)

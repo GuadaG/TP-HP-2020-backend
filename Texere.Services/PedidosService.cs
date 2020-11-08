@@ -40,11 +40,9 @@ namespace Texere.Service
 
         public IEnumerable<Pedidos> GetByCliente(int clienteId)
         {
-            var result = _texereDbContext.Pedidos.Where(p => p.ClienteId == clienteId).ToList();
-            //foreach (var item in result)
-            //{
-            //    item.Total = 
-            //}
+            var result = _texereDbContext.Pedidos.Where(p => p.ClienteId == clienteId)
+                .Include(p => p.Estado)
+                .ToList();
             return result;
         }
 
