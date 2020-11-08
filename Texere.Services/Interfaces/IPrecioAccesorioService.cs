@@ -11,6 +11,6 @@ namespace Texere.Service.Interfaces
         bool Add(PrecioAccesorio model);
         bool Delete(int id);
         bool Update(PrecioAccesorio model);
-        PrecioAccesorio Get(int id);
+        PrecioAccesorio GetByDate(int accesorioId, DateTime fecha);
     }
 }

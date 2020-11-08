@@ -23,6 +23,7 @@ namespace Texere.DataAccess
         public DbSet<Materiales> Materiales { get; set; }
         public DbSet<LineasPedido> LineasPedido { get; set; }
         public DbSet<ColoresModelos> ColoresModelos { get; set; }
+        public DbSet<Estados> Estados { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -412,7 +413,7 @@ namespace Texere.DataAccess
                 new Instituciones
                 {
                     InstitucionId = 41,
-                    Descripcion = "Colegio Msericordia"
+                    Descripcion = "Colegio Misericordia"
                 },
                 new Instituciones
                 {
@@ -548,6 +549,29 @@ namespace Texere.DataAccess
                     Domicilio = "Pellegrini 1243",
                     Email = "mjuarez@gmail.com",
                     Telefono = "43658740"
+                }
+            );
+
+            modelBuilder.Entity<Estados>().HasData(
+                new Estados
+                {
+                    EstadoId = 1,
+                    Descripcion = "Pendiente"
+                },
+                new Estados
+                {
+                    EstadoId = 2,
+                    Descripcion = "En Curso"
+                },
+                new Estados
+                {
+                    EstadoId = 3,
+                    Descripcion = "Finalizado"
+                },
+                new Estados
+                {
+                    EstadoId = 4,
+                    Descripcion = "Cancelado"
                 }
             );
             #endregion Seed

@@ -26,13 +26,23 @@ namespace Texere.Service
 
             try
             {
-                result = _texereDbContext.Pedidos.ToList();
+                result = _texereDbContext.Pedidos
+                    .Include(p => p.Estado)
+                    .ToList();
             }
             catch (System.Exception)
             {
 
             }
 
+            return result;
+        }
+
+        public IEnumerable<Pedidos> GetByCliente(int clienteId)
+        {
+            var result = _texereDbContext.Pedidos.Where(p => p.ClienteId == clienteId)
+                .Include(p => p.Estado)
+                .ToList();
             return result;
         }
 

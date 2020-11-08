@@ -9,13 +9,12 @@ namespace Texere.Model
 	{
 		[Key]
 		public int LineaPedidoId { get; set; }
-		public int Cantidad { get; set; }
-		public Estados Estado { get; set; }
+		public int Cantidad { get; set; }		
 		[StringLength(50)]
 		public string Observaciones { get; set; }
 
 		public virtual Pedidos Pedido { get; set; }
-		public int PedidoId { get; set; }
+		public int? PedidoId { get; set; }
 
 		public virtual Talles Talle { get; set; }
 		public int? TalleId { get; set; }
@@ -29,13 +28,7 @@ namespace Texere.Model
 		public virtual Modelos Modelo { get; set; }
 		public int ModeloId { get; set; }
 
-
+		public virtual Estados Estado { get; set; }
+		public int EstadoId { get; set; }
 	}
-	//public enum Estados
-	//{
-	//	Pendiente = 0,
-	//	EnCurso = 1,
-	//	Finalizado = 2,
-	//	Cancelado = 3
-	//}
 }	

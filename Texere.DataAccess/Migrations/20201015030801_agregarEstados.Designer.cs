@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Texere.DataAccess;
 
 namespace Texere.DataAccess.Migrations
 {
     [DbContext(typeof(TexereDbContext))]
-    partial class TexereDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201015030801_agregarEstados")]
+    partial class agregarEstados
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -679,9 +681,6 @@ namespace Texere.DataAccess.Migrations
                     b.Property<string>("DescModelo")
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
-
-                    b.Property<byte[]>("Imagen")
-                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("ModeloId");
 
