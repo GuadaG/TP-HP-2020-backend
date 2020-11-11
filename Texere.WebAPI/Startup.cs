@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Texere.DataAccess;
 using Texere.Service;
 using Texere.Service.Interfaces;
+using AutoMapper;
 
 namespace Texere.WebAPI
 {
@@ -31,27 +32,19 @@ namespace Texere.WebAPI
         {
             services.AddControllers();
             var connection = Configuration.GetConnectionString("myconn");
-            services.AddDbContext<TexereDbContext>(options => options.UseSqlServer(connection));
 
-            services.AddTransient<IClientesService, ClientesService>(); 
-           
-            services.AddTransient<ITallesService, TallesService>();
-            
-            services.AddTransient<IAccesoriosService, AccesoriosService>();
-            
-            services.AddTransient<IModelosService, ModelosService>();
-            
-            services.AddTransient<IPedidosService, PedidosService>();
-            
-            services.AddTransient<IMaterialesService, MaterialesService>();
-            
-            services.AddTransient<ILineasPedidoService, LineasPedidoService>();
-            
-            services.AddTransient<IPrecioAccesorioService, PrecioAccesorioService>();       
-            
-            services.AddTransient<IColoresService, ColoresService>();
-            
+            services.AddDbContext<TexereDbContext>(options => options.UseSqlServer(connection));
+            services.AddTransient<IClientesService, ClientesService>();           
+            services.AddTransient<ITallesService, TallesService>();            
+            services.AddTransient<IAccesoriosService, AccesoriosService>();            
+            services.AddTransient<IModelosService, ModelosService>();            
+            services.AddTransient<IPedidosService, PedidosService>();            
+            services.AddTransient<IMaterialesService, MaterialesService>();       
+            services.AddTransient<ILineasPedidoService, LineasPedidoService>();          
+            services.AddTransient<IPrecioAccesorioService, PrecioAccesorioService>();               
+            services.AddTransient<IColoresService, ColoresService>();           
             services.AddTransient<IInstitucionesService, InstitucionesService>();
+            services.AddTransient<IEstadosService, EstadosService>();
 
             services.AddCors(options =>
                 {
@@ -62,6 +55,11 @@ namespace Texere.WebAPI
                     );
                 }
             );
+
+            services.AddControllers().AddNewtonsoftJson(x =>
+              x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

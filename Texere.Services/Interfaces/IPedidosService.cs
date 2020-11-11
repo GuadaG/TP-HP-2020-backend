@@ -12,5 +12,6 @@ namespace Texere.Service.Interfaces
         bool Delete(int id);
         bool Update(Pedidos model);
         Pedidos Get(int id);
+        IEnumerable<Pedidos> GetByCliente(int clienteId);
     }
 }
