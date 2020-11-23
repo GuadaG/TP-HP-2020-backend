@@ -63,7 +63,7 @@ namespace Texere.Service
 
         public IEnumerable<Modelos> GetAll()
         {
-            var result = _texereDbContext.Modelos.ToList();
+            var result =  _texereDbContext.Modelos.ToList();
 
             return result;
                 
