@@ -44,15 +44,10 @@ namespace Texere.Service
 
         public LineasPedido Get(int id)
         {
-            var result = new LineasPedido();
-
-            try
+            LineasPedido result = _texereDbContext.LineasPedido.Where(x => x.LineaPedidoId == id).FirstOrDefault();
+            if (result == null)
             {
-                result = _texereDbContext.LineasPedido.Single(x => x.LineaPedidoId == id);
-            }
-            catch (Exception)
-            {
-
+                throw new Exception(string.Format("{0} - Linea de pedido no encontrada", System.Net.HttpStatusCode.NotFound));
             }
 
             return result;
@@ -62,6 +57,7 @@ namespace Texere.Service
         {
             try
             {
+                model.EstadoId = 1;
                 _texereDbContext.Add(model);
                 _texereDbContext.SaveChanges();
             }
@@ -73,20 +69,13 @@ namespace Texere.Service
             return true;
         }
 
-        public bool Update(LineasPedido model)
+        public bool Update(LineasPedido updatedModel)
         {
             try
             {
-                var originalModel = _texereDbContext.LineasPedido.Single(x =>
-                    x.LineaPedidoId == model.LineaPedidoId
-                );
-
-                originalModel.Cantidad = model.Cantidad;
-                originalModel.Observaciones = model.Observaciones;
-                originalModel.Estado = model.Estado;
-
-                _texereDbContext.Update(originalModel);
+                _texereDbContext.Update(updatedModel);
                 _texereDbContext.SaveChanges();
+                //UpdatePedido(model.PedidoId);
             }
             catch (Exception)
             {
