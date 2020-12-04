@@ -57,7 +57,7 @@ namespace Texere.Service
         {
             try
             {
-                model.EstadoId = 1;
+                model.EstadoId = (int)EstadosEnum.Pendiente;
                 _texereDbContext.Add(model);
                 _texereDbContext.SaveChanges();
             }
@@ -75,7 +75,7 @@ namespace Texere.Service
             {
                 _texereDbContext.Update(updatedModel);
                 _texereDbContext.SaveChanges();
-                //UpdatePedido(model.PedidoId);
+                UpdatePedido(updatedModel);
             }
             catch (Exception)
             {
@@ -93,6 +93,59 @@ namespace Texere.Service
                 _texereDbContext.SaveChanges();
             }
             catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void UpdatePedido(LineasPedido updatedModel)
+        {
+            Pedidos pedido = _texereDbContext.Pedidos.Where(p => p.PedidoId == updatedModel.PedidoId)
+                .Include(p => p.LineasPedido)
+                .FirstOrDefault();
+
+            switch (updatedModel.EstadoId)
+            {
+                case (int)EstadosEnum.Pendiente:
+                {
+                    if (pedido.LineasPedido.All(lp => lp.EstadoId == (int)EstadosEnum.Pendiente))
+                        ActualizarPedido(pedido, (int)EstadosEnum.Pendiente);
+                    break;
+                }
+                case (int)EstadosEnum.EnCurso:
+                {
+                    ActualizarPedido(pedido, (int)EstadosEnum.EnCurso);
+                    break;
+                }
+                case (int)EstadosEnum.Finalizado:
+                {
+                    if (pedido.LineasPedido.All(lp => lp.EstadoId == (int)EstadosEnum.Finalizado))
+                        ActualizarPedido(pedido, (int)EstadosEnum.Finalizado);
+                    break;
+                }
+                case (int)EstadosEnum.Cancelado:
+                {
+                    if (pedido.LineasPedido.All(lp => lp.EstadoId == (int)EstadosEnum.Cancelado))
+                        ActualizarPedido(pedido, (int)EstadosEnum.Cancelado);
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+
+        private bool ActualizarPedido(Pedidos pedido, int estadoId)
+        {
+            try
+            {
+                pedido.EstadoId = estadoId;
+
+                _texereDbContext.Update(pedido);
+                _texereDbContext.SaveChanges();
+            }
+            catch
             {
                 return false;
             }
