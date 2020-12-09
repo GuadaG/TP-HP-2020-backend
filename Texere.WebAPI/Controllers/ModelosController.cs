@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Texere.Service.Interfaces;
 using Texere.Model;
-using Microsoft.AspNetCore.Http;
 using Texere.WebAPI.DTOs;
 
 namespace Texere.WebAPI.Controllers
@@ -15,9 +14,9 @@ namespace Texere.WebAPI.Controllers
     public class ModelosController : ControllerBase
     {
         private readonly IModelosService _modelosService;
-      
+
         public ModelosController(IModelosService modelosService)
-            {
+        {
             _modelosService = modelosService;
         }
 
@@ -25,9 +24,13 @@ namespace Texere.WebAPI.Controllers
             [HttpGet]
             public IActionResult Get()
             {
-                return Ok(
-                    _modelosService.GetAll()
-                );
+                var lista = _modelosService.GetAll();
+                if (lista == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(lista);
             }
 
         [HttpGet("{id}")]
