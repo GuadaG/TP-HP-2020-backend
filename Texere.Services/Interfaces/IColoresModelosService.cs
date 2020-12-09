@@ -7,10 +7,9 @@ namespace Texere.Service.Interfaces
 {
     public interface IColoresModelosService
     {
-        IEnumerable<ColoresModelos> GetAll();
+        IEnumerable<ColoresModelos> GetAll(int modeloId);
         bool Add(ColoresModelos model);
-        bool Delete(int id);
+        bool Delete(int modeloId, int colorId);
         bool Update(ColoresModelos model);
-        ColoresModelos Get(int id);
     }
 }

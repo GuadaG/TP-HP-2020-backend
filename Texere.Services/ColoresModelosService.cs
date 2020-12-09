@@ -17,13 +17,13 @@ namespace Texere.Service
             _texereDbContext = texereDbContext;
         }
 
-        public IEnumerable<ColoresModelos> GetAll()
+        public IEnumerable<ColoresModelos> GetAll(int modeloId)
         {
             var result = new List<ColoresModelos>();
 
             try
             {
-                result = _texereDbContext.ColoresModelos.ToList();
+                result = _texereDbContext.ColoresModelos.Where(cm => cm.ModeloId == modeloId).OrderBy(cm => cm.Orden).ToList();
             }
             catch (System.Exception)
             {
@@ -31,34 +31,15 @@ namespace Texere.Service
             }
 
             return result;
-        }
-
-        public ColoresModelos Get(int id)
-        {
-            var result = new ColoresModelos();
-
-            try
-            {
-                result = _texereDbContext.ColoresModelos.Single(c => c.ColorId == id);
-                result = _texereDbContext.ColoresModelos.Single(m => m.ModeloId == id);
-            }
-            catch (System.Exception)
-            {
-
-            }
-
-            return result;
-        }
+        }  
 
         public bool Update(ColoresModelos model)
         {
             try
             {
-                var originalModel = _texereDbContext.ColoresModelos.Single(c =>
-                    c.ColorId == model.ColorId
+                ColoresModelos originalModel = _texereDbContext.ColoresModelos.Single(cm =>
+                    cm.ColorId == model.ColorId && cm.ModeloId == model.ModeloId
                 );
-               // var originalModel = _texereDbContext.ColoresModelos.Single(m =>
-               //     m.ModeloId == model.ModeloId );
 
                 originalModel.ColorId = model.ColorId;
                 originalModel.ModeloId = model.ModeloId;
@@ -90,15 +71,17 @@ namespace Texere.Service
             return true;
         }
 
-        public bool Delete(int id)
+        public bool Delete(int modeloId, int colorId)
         {
             try
             {
-                _texereDbContext.Entry(new ColoresModelos { ColorId = id }).State = EntityState.Deleted;
-                _texereDbContext.Entry(new ColoresModelos { ModeloId = id }).State = EntityState.Deleted;
+                ColoresModelos model = _texereDbContext.ColoresModelos.First(cm =>
+                    cm.ColorId == colorId && cm.ModeloId == modeloId
+                );
+                _texereDbContext.ColoresModelos.Remove(model);
                 _texereDbContext.SaveChanges();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return false;
             }

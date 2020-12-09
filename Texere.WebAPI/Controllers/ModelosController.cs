@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Texere.Service.Interfaces;
 using Texere.Model;
+using Microsoft.AspNetCore.Http;
+using Texere.WebAPI.DTOs;
 
 namespace Texere.WebAPI.Controllers
 {
@@ -43,10 +45,15 @@ namespace Texere.WebAPI.Controllers
 
             return Ok(item);
         }
-
+        
         [HttpPost]
-        public IActionResult Add([FromBody] Modelos model)
+        public IActionResult Add([FromBody] ModelosDTO datos)
         {
+            Modelos model = new Modelos
+            {
+                DescModelo = datos.DescModelo,
+                Imagen = Convert.FromBase64String(datos.Imagen)
+            };
             return Ok(
                 _modelosService.Add(model)
             );

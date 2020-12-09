@@ -45,6 +45,7 @@ namespace Texere.WebAPI
             services.AddTransient<IColoresService, ColoresService>();           
             services.AddTransient<IInstitucionesService, InstitucionesService>();
             services.AddTransient<IEstadosService, EstadosService>();
+            services.AddTransient<IColoresModelosService, ColoresModelosService>();
 
             services.AddCors(options =>
                 {

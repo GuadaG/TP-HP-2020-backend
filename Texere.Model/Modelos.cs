@@ -16,9 +16,7 @@ namespace Texere.Model
         public byte[] Imagen { get; set; }
 
         public virtual ICollection<LineasPedido> LineasPedido { get; set; }
-
         public virtual ICollection<Instituciones> Instituciones { get; set; }
         public virtual ICollection<ColoresModelos> ColoresModelos { get; set; }
-
     }
 }
