@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Texere.Service.Interfaces;
 using Texere.WebAPI.DTOs;
+using Texere.Model;
 
 namespace Texere.WebAPI.Controllers
 {
@@ -72,6 +73,43 @@ namespace Texere.WebAPI.Controllers
                 total += linea.Cantidad * precio.Valor;
             }
             return total;
+        }
+
+
+        [HttpPost]
+        public IActionResult Add([FromBody] Pedidos model)
+        {
+            return Ok(
+                _pedidosService.Add(model)
+            );
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            return Ok(
+                _pedidosService.Delete(id)
+            );
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody] Pedidos model)
+        {
+            if (id != model.PedidoId)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                _pedidosService.Update(model);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(String.Format("Ha ocurrido la siguiente excepción: {0}", ex.Message));
+            }
+
+            return NoContent();
         }
     }
 }
