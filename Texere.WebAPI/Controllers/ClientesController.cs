@@ -70,26 +70,35 @@ namespace Texere.WebAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            return Ok(
-                _clientesService.Delete(id)
-            );
+            try
+            {
+                var result = _clientesService.Delete(id);
+                if (!result)
+                    throw new Exception("No fue posible eliminar el registro");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            return Ok();
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] Clientes model)
         {
-            if (id != model.ClienteId)
+            Clientes cliente = _clientesService.Get(id);
+            if (cliente == null)
             {
-                return BadRequest();
+                return NotFound(String.Format("No se encontró al cliente con ID {0}", id));
             }
-
+            model.ClienteId = id;
             try
             {
                 _clientesService.Update(model);
             }
             catch (Exception ex)
             {
-                return NotFound(String.Format("Ha ocurrido la siguiente excepción: {0}", ex.Message));
+                return BadRequest(String.Format("Error - Ha ocurrido la siguiente excepción: {0}", ex.Message));
             }
            
             return NoContent();

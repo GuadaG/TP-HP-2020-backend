@@ -29,6 +29,6 @@ namespace Texere.Model
 		public int ModeloId { get; set; }
 
 		public virtual Estados Estado { get; set; }
-		public int EstadoId { get; set; }
+		public int? EstadoId { get; set; }
 	}
 }	
