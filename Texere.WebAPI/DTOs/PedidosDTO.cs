@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Texere.Model;
 
 namespace Texere.WebAPI.DTOs
 {
@@ -11,5 +12,8 @@ namespace Texere.WebAPI.DTOs
         public DateTime Fecha { get; set; }
         public float Total { get; set; }
         public string Estado { get; set; }
+        public int EstadoId { get; set; }
+        public string ClienteDni { get; set; }
+        public string ClienteNombre { get; set; }
     }
 }

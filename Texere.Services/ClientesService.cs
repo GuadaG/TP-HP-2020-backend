@@ -39,9 +39,9 @@ namespace Texere.Service
                 _texereDbContext.Entry(new Clientes { ClienteId = id }).State = EntityState.Deleted;
                 _texereDbContext.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return false;
+                throw new Exception(e.Message);
             }
 
             return true;
@@ -49,7 +49,7 @@ namespace Texere.Service
 
         public Clientes Get(int id)
         {
-            var result = _texereDbContext.Clientes.Where(c => c.ClienteId == id).FirstOrDefault();
+            Clientes result = _texereDbContext.Clientes.Where(c => c.ClienteId == id).FirstOrDefault();
 
             if(result == null)
             {
@@ -61,7 +61,7 @@ namespace Texere.Service
 
         public Clientes GetByDni(string dni)
         {
-            var result = _texereDbContext.Clientes.Where(c => c.DniCuit == dni).FirstOrDefault();
+            Clientes result = _texereDbContext.Clientes.Where(c => c.DniCuit == dni).FirstOrDefault();
 
             if (result == null)
             {

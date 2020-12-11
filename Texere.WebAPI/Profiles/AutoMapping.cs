@@ -43,11 +43,20 @@ namespace Texere.WebAPI
                     dest.PedidoId,
                     opt => opt.MapFrom(src => src.PedidoId))
                 .ForMember(dest =>
+                    dest.EstadoId,
+                    opt => opt.MapFrom(src => src.Estado.EstadoId))
+                .ForMember(dest =>
                     dest.Estado,
                     opt => opt.MapFrom(src => src.Estado.Descripcion))
                 .ForMember(dest =>
                     dest.Fecha,
-                    opt => opt.MapFrom(src => src.Fecha));
+                    opt => opt.MapFrom(src => src.Fecha))
+                .ForMember(dest =>
+                    dest.ClienteDni,
+                    opt => opt.MapFrom(src => src.Cliente.DniCuit))
+                .ForMember(dest =>
+                    dest.ClienteNombre,
+                    opt => opt.MapFrom(src => src.Cliente.NombreApellido));
         }
     }
 }

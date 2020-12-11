@@ -28,6 +28,8 @@ namespace Texere.Service
             {
                 result = _texereDbContext.Pedidos
                     .Include(p => p.Estado)
+                    .Include(p => p.Cliente)
+                    .OrderByDescending(p => p.Fecha)
                     .ToList();
             }
             catch (System.Exception)
