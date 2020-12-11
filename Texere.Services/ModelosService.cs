@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,39 +19,78 @@ namespace Texere.Service
 
         public bool Add(Modelos model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _texereDbContext.Add(model);
+                _texereDbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                //TODO - agregar msj error tipo -> String.Format("Ha ocurrido la siguiente excepción: {0}", e.Message);
+                return false;
+            }
+
+            return true;
+         
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _texereDbContext.Entry(new Modelos { ModeloId = id }).State = EntityState.Deleted;
+                _texereDbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public Modelos Get(int id)
         {
-            throw new NotImplementedException();
-        }
+            var result = _texereDbContext.Modelos.Where(m => m.ModeloId == id).FirstOrDefault();
 
-        public IEnumerable<Modelos> GetAll()
-        {
-            var result = new List<Modelos>();
-
-            try
+            if(result == null)
             {
-                result = _texereDbContext.Modelos.ToList();
-            }
-            catch (System.Exception)
-            {
-
+                throw new Exception(string.Format("{0} - Cliente no encontrado", System.Net.HttpStatusCode.NotFound));
             }
 
             return result;
         }
 
+        public IEnumerable<Modelos> GetAll()
+        {
+            var result =  _texereDbContext.Modelos.ToList();
+
+            return result;
+                
+        }
+
         public bool Update(Modelos model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var originalModel = _texereDbContext.Modelos.Single(x =>
+                    x.ModeloId == model.ModeloId
+                );
+
+                originalModel.DescModelo = model.DescModelo;
+                //faltaría la  imagen
+
+                _texereDbContext.Update(originalModel);
+                _texereDbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
-}
+    }
+
 

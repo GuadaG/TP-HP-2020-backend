@@ -34,7 +34,7 @@ namespace Texere.WebAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var lista = _mapper.Map<IEnumerable<PedidosDTO>>(_pedidosService.GetAll());
+            IEnumerable<PedidosDTO> lista = _mapper.Map<IEnumerable<PedidosDTO>>(_pedidosService.GetAll());
             if (lista == null)
             {
                 return NotFound();

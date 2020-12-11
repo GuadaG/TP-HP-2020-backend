@@ -17,33 +17,13 @@ namespace Texere.Service
             _texereDbContext = texereDbContext;
         }
 
-        public bool Add(Instituciones model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(Instituciones model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Instituciones Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<Instituciones> GetAll()
         {
             var result = new List<Instituciones>();
 
             try
             {
-                result = _texereDbContext.Instituciones.ToList();
+                result = _texereDbContext.Instituciones.OrderBy(i => i.Descripcion).ToList();
             }
             catch (System.Exception)
             {
