@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -23,7 +24,10 @@ namespace Texere.Service
 
             try
             {
-                result = _texereDbContext.Instituciones.OrderBy(i => i.Descripcion).ToList();
+                result = _texereDbContext.Instituciones       
+                    .OrderBy(i => i.Descripcion)
+                    .Include(i => i.Modelo)
+                    .ToList();
             }
             catch (System.Exception)
             {

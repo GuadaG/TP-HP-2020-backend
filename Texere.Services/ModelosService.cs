@@ -63,7 +63,11 @@ namespace Texere.Service
 
         public IEnumerable<Modelos> GetAll()
         {
-            var result =  _texereDbContext.Modelos.ToList();
+            var result =  _texereDbContext.Modelos
+                .OrderBy(m => m.DescModelo)
+                .Include(m => m.ColoresModelos)
+                .Include(m => m.Instituciones)
+                .ToList();
 
             return result;
                 
