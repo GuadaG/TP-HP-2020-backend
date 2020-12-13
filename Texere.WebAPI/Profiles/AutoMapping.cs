@@ -57,6 +57,43 @@ namespace Texere.WebAPI
                 .ForMember(dest =>
                     dest.ClienteNombre,
                     opt => opt.MapFrom(src => src.Cliente.NombreApellido));
+
+            CreateMap<Instituciones, InstitucionesDTO>()
+                .ForMember(dest =>
+                    dest.InstitucionId,
+                    opt => opt.MapFrom(src => src.InstitucionId))
+                .ForMember(dest =>
+                    dest.DescInstitucion,
+                    opt => opt.MapFrom(src => src.Descripcion))
+                .ForMember(dest =>
+                    dest.DescModelo,
+                    opt => opt.MapFrom(src => src.Modelo.DescModelo))
+                .ForMember(dest =>
+                    dest.Imagen,
+                    opt => opt.MapFrom(src => src.Modelo.Imagen))
+                .ForMember(dest =>
+                    dest.ModeloId,
+                    opt => opt.MapFrom(src => src.ModeloId));
+
+            CreateMap<Modelos, ModelosDTO>()
+                .ForMember(dest =>
+                    dest.ModeloId,
+                    opt => opt.MapFrom(src => src.ModeloId))
+                .ForMember(dest =>
+                    dest.DescModelo,
+                    opt => opt.MapFrom(src => src.DescModelo))
+                .ForMember(dest =>
+                    dest.ColorBase,
+                    opt => opt.MapFrom(src => src.ColoresModelos.Where(c => c.Orden == 0).Select(c => c.ColorId).FirstOrDefault()))
+                .ForMember(dest =>
+                    dest.Color1,
+                    opt => opt.MapFrom(src => src.ColoresModelos.Where(c => c.Orden == 1).Select(c => c.ColorId).FirstOrDefault()))
+                .ForMember(dest =>
+                    dest.ImagenByte,
+                    opt => opt.MapFrom(src => src.Imagen))
+                .ForMember(dest =>
+                    dest.Instituciones,
+                    opt => opt.MapFrom(src => src.Instituciones.Select(i => i.InstitucionId)));
         }
     }
 }

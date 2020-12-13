@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Texere.Service.Interfaces;
 using Texere.Model;
 using Texere.WebAPI.DTOs;
+using AutoMapper;
 
 namespace Texere.WebAPI.Controllers
 {
@@ -14,17 +15,19 @@ namespace Texere.WebAPI.Controllers
     public class ModelosController : ControllerBase
     {
         private readonly IModelosService _modelosService;
+        private readonly IMapper _mapper;
 
-        public ModelosController(IModelosService modelosService)
+        public ModelosController(IModelosService modelosService, IMapper mapper)
         {
             _modelosService = modelosService;
+            _mapper = mapper;
         }
 
             // GET api/values
             [HttpGet]
             public IActionResult Get()
             {
-                var lista = _modelosService.GetAll();
+            IEnumerable<Modelos> lista = _modelosService.GetAll();
                 if (lista == null)
                 {
                     return NotFound();
@@ -32,6 +35,18 @@ namespace Texere.WebAPI.Controllers
 
                 return Ok(lista);
             }
+
+        [HttpGet("GetWithDetails")]
+        public IActionResult GetWithDetails()
+        {
+            IEnumerable<ModelosDTO> lista = _mapper.Map<IEnumerable<ModelosDTO>>(_modelosService.GetAll());
+            if (lista == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(lista);
+        }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
