@@ -31,7 +31,7 @@ namespace Texere.Service
                     .OrderByDescending(p => p.Fecha)
                     .ToList();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
 
             }
@@ -55,7 +55,7 @@ namespace Texere.Service
             {
                 result = _texereDbContext.Pedidos.Single(x => x.PedidoId == id);
             }
-            catch (System.Exception)
+            catch (Exception)
             {
 
             }
@@ -67,14 +67,17 @@ namespace Texere.Service
         {
             try
             {
-                model.EstadoId = 1;
+                model.EstadoId = (int)EstadosEnum.Pendiente;
+
                 foreach (LineasPedido lp in model.LineasPedido)
-                    lp.EstadoId = 1;
+                {
+                    lp.EstadoId = (int)EstadosEnum.Pendiente;
+                }                    
 
                 _texereDbContext.Add(model);
                 _texereDbContext.SaveChanges();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -97,7 +100,7 @@ namespace Texere.Service
                 _texereDbContext.Update(originalModel);
                 _texereDbContext.SaveChanges();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -112,7 +115,7 @@ namespace Texere.Service
                 _texereDbContext.Entry(new Pedidos { PedidoId = id }).State = EntityState.Deleted; ;
                 _texereDbContext.SaveChanges();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return false;
             }
