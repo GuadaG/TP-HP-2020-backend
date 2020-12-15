@@ -10,8 +10,6 @@ namespace Texere.Model
         [StringLength(100)]
         public string DescModelo { get; set; }
         public byte[] Imagen { get; set; }
-        public int ColorBaseId { get; set; }
-        public virtual Colores ColorBase { get; set; }
         public virtual ICollection<LineasPedido> LineasPedido { get; set; }
         public virtual ICollection<Instituciones> Instituciones { get; set; }
         public virtual ICollection<ColoresModelos> ColoresModelos { get; set; }

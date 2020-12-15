@@ -32,11 +32,13 @@ namespace Texere.DataAccess
             modelBuilder.Entity<ColoresModelos>()
                 .HasOne(cm => cm.Modelos)
                 .WithMany(m => m.ColoresModelos)
-                .HasForeignKey(cm => cm.ModeloId);
+                .HasForeignKey(cm => cm.ModeloId)
+                .OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<ColoresModelos>()
                 .HasOne(cm => cm.Colores)
                 .WithMany(c => c.ColoresModelos)
-                .HasForeignKey(cm => cm.ColorId);
+                .HasForeignKey(cm => cm.ColorId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             #region Seed
             modelBuilder.Entity<Accesorios>().HasData(
@@ -603,14 +605,12 @@ namespace Texere.DataAccess
                 new Modelos
                 {
                     ModeloId = 1,
-                    DescModelo = "Azul marino con vivo y raya blanco óptico",
-                    ColorBaseId = 4
+                    DescModelo = "Azul marino con vivo y raya blanco óptico"
                 },
                 new Modelos
                 {
                     ModeloId = 2,
-                    DescModelo = "Blanco óptico con rayas rojo sangre y verde benetton",
-                    ColorBaseId = 6
+                    DescModelo = "Blanco óptico con rayas rojo sangre y verde benetton"
                 }
             );
 
@@ -618,17 +618,32 @@ namespace Texere.DataAccess
                new ColoresModelos
                {
                    ModeloId = 1, // Azul marino con vivo y raya blanco óptico
-                   ColorId = 6 // Blanco óptico
+                   ColorId = 4, // Blanco óptico
+                   Orden = 0
+               },
+               new ColoresModelos
+               {
+                   ModeloId = 1, // Azul marino con vivo y raya blanco óptico
+                   ColorId = 6, // Blanco óptico
+                   Orden = 1
                },
                new ColoresModelos
                {
                    ModeloId = 2, // Blanco óptico con rayas rojo sangre y verde benetton
-                   ColorId = 2 // Verde benetton
+                   ColorId = 6, // Verde benetton
+                   Orden = 0
                },
                new ColoresModelos
                {
                    ModeloId = 2, // Blanco óptico con rayas rojo sangre y verde benetton
-                   ColorId = 3 // Rojo sangre
+                   ColorId = 2, // Verde benetton
+                   Orden = 1
+               },
+               new ColoresModelos
+               {
+                   ModeloId = 2, // Blanco óptico con rayas rojo sangre y verde benetton
+                   ColorId = 3, // Rojo sangre
+                   Orden = 2
                }
            );
             #endregion Seed

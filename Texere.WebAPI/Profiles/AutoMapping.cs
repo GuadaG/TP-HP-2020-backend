@@ -98,9 +98,6 @@ namespace Texere.WebAPI
                     dest.ImagenByte,
                     opt => opt.MapFrom(src => src.Imagen))
                 .ForMember(dest =>
-                    dest.ColorBaseId,
-                    opt => opt.MapFrom(src => src.ColorBaseId))
-                .ForMember(dest =>
                     dest.Instituciones,
                     opt => opt.MapFrom(src => src.Instituciones.Select(i => i.InstitucionId)))
                 .ForMember(dest =>
