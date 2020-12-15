@@ -60,6 +60,30 @@ namespace Texere.DataAccess
                 }
             );
 
+            modelBuilder.Entity<PrecioAccesorio>().HasData(
+               new PrecioAccesorio
+               {                   
+                   PrecioAccesorioId = 1,
+                   AccesorioId = 1,
+                   FechaVigencia = new DateTime(2020, 1, 1),
+                   Valor = 40
+               },
+               new PrecioAccesorio
+               {
+                   PrecioAccesorioId = 2,
+                   AccesorioId = 2,
+                   FechaVigencia = new DateTime(2020, 1, 1),
+                   Valor = 30
+               },
+               new PrecioAccesorio
+               {
+                   PrecioAccesorioId = 3,
+                   AccesorioId = 3,
+                   FechaVigencia = new DateTime(2020, 1, 1),
+                   Valor = 150
+               }
+           );
+
             modelBuilder.Entity<Talles>().HasData(
                 new Talles
                 {
@@ -574,6 +598,39 @@ namespace Texere.DataAccess
                     Descripcion = "Cancelado"
                 }
             );
+
+            modelBuilder.Entity<Modelos>().HasData(
+                new Modelos
+                {
+                    ModeloId = 1,
+                    DescModelo = "Azul marino con vivo y raya blanco óptico",
+                    ColorBaseId = 4
+                },
+                new Modelos
+                {
+                    ModeloId = 2,
+                    DescModelo = "Blanco óptico con rayas rojo sangre y verde benetton",
+                    ColorBaseId = 6
+                }
+            );
+
+            modelBuilder.Entity<ColoresModelos>().HasData(
+               new ColoresModelos
+               {
+                   ModeloId = 1, // Azul marino con vivo y raya blanco óptico
+                   ColorId = 6 // Blanco óptico
+               },
+               new ColoresModelos
+               {
+                   ModeloId = 2, // Blanco óptico con rayas rojo sangre y verde benetton
+                   ColorId = 2 // Verde benetton
+               },
+               new ColoresModelos
+               {
+                   ModeloId = 2, // Blanco óptico con rayas rojo sangre y verde benetton
+                   ColorId = 3 // Rojo sangre
+               }
+           );
             #endregion Seed
         }
     }
