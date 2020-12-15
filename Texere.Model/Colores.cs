@@ -13,6 +13,6 @@ namespace Texere.Model
         [StringLength(20)]
         public string Descripcion { get; set; }
 
-        public ICollection<ColoresModelos> ColoresModelos { get; set; }
+        public virtual ICollection<ColoresModelos> ColoresModelos { get; set; }
     }
 }

@@ -54,7 +54,7 @@ namespace Texere.Service
 
             if(result == null)
             {
-                throw new Exception(string.Format("{0} - Cliente no encontrado", System.Net.HttpStatusCode.NotFound));
+                throw new Exception(string.Format("{0} - Modelo no encontrado", System.Net.HttpStatusCode.NotFound));
             }
 
             return result;
