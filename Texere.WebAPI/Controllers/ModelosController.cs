@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Texere.Service.Interfaces;
+using Texere.WebAPI.DTOs;
 
 namespace Texere.WebAPI.Controllers
 {
@@ -12,20 +11,26 @@ namespace Texere.WebAPI.Controllers
         public class ModelosController : ControllerBase
         {
             private readonly IModelosService _modelosService;
+            private readonly IMapper _mapper;
 
-            public ModelosController(IModelosService modelosService)
+        public ModelosController(IModelosService modelosService, IMapper mapper)
             {
                 _modelosService = modelosService;
+                _mapper = mapper;
             }
 
             // GET api/values
             [HttpGet]
             public IActionResult Get()
             {
-                return Ok(
-                    _modelosService.GetAll()
-                );
+                var lista = _mapper.Map<IEnumerable<ModelosDTO>>(_modelosService.GetAll());
+
+                if (lista == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(lista);
             }
         }
     }
-

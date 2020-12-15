@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Texere.DataAccess;
 using Texere.Model;
 using Texere.Service.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Texere.Service
 {
@@ -37,7 +37,10 @@ namespace Texere.Service
 
             try
             {
-                result = _texereDbContext.Modelos.ToList();
+                result = _texereDbContext.Modelos
+                    .Include(i => i.Instituciones)
+                    .Include(m => m.ColoresModelos)
+                    .ToList();
             }
             catch (System.Exception)
             {
@@ -53,4 +56,3 @@ namespace Texere.Service
         }
     }
 }
-
