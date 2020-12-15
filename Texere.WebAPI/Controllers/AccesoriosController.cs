@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Texere.Service.Interfaces;
+using Texere.WebAPI.DTOs;
 
 namespace Texere.WebAPI.Controllers
 {
@@ -13,19 +11,26 @@ namespace Texere.WebAPI.Controllers
     public class AccesoriosController : ControllerBase
     {
         private readonly IAccesoriosService _accesoriosService;
+        private readonly IMapper _mapper;
 
-        public AccesoriosController(IAccesoriosService accesoriosService)
+        public AccesoriosController(IAccesoriosService accesoriosService, IMapper mapper)
         {
             _accesoriosService = accesoriosService;
+            _mapper = mapper;
         }
 
         // GET api/values
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(
-                _accesoriosService.GetAll()
-            );
+            var lista = _mapper.Map<IEnumerable<AccesoriosDTO>>(_accesoriosService.GetAll());
+
+            if (lista == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(lista);
         }
     }
 }

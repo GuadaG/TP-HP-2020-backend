@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Texere.DataAccess;
 using Texere.Model;
 using Texere.Service.Interfaces;
@@ -26,7 +24,9 @@ namespace Texere.Service
 
             try
             {
-                result = _texereDbContext.Accesorios.ToList();
+                result = _texereDbContext.Accesorios
+                    .Include(a => a.HistoricoPrecio)
+                    .ToList();
             }
             catch (System.Exception)
             {
