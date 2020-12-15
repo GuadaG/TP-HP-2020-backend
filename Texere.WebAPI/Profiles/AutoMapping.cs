@@ -48,6 +48,40 @@ namespace Texere.WebAPI
                 .ForMember(dest =>
                     dest.Fecha,
                     opt => opt.MapFrom(src => src.Fecha));
+
+            CreateMap<Modelos, ModelosDTO>()
+                .ForMember(dest =>
+                    dest.ModeloId,
+                    opt => opt.MapFrom(src => src.ModeloId))
+                .ForMember(dest =>
+                    dest.DescModelo,
+                    opt => opt.MapFrom(src => src.DescModelo))
+                .ForMember(dest =>
+                    dest.Imagen,
+                    opt => opt.MapFrom(src => src.Imagen))
+                .ForMember(dest =>
+                    dest.ColorBaseId,
+                    opt => opt.MapFrom(src => src.ColorBaseId))
+                .ForMember(dest =>
+                    dest.Instituciones,
+                    opt => opt.MapFrom(src => src.Instituciones.Select(i => i.InstitucionId)))
+                .ForMember(dest =>
+                    dest.Colores,
+                    opt => opt.MapFrom(src => src.ColoresModelos.Select(i => i.ColorId)));
+
+            CreateMap<Accesorios, AccesoriosDTO>()
+                .ForMember(dest =>
+                    dest.AccesorioId,
+                    opt => opt.MapFrom(src => src.AccesorioId))
+                .ForMember(dest =>
+                    dest.DescAccesorio,
+                    opt => opt.MapFrom(src => src.DescAccesorio))
+                .ForMember(dest =>
+                    dest.TieneTalle,
+                    opt => opt.MapFrom(src => src.TieneTalle))
+                .ForMember(dest =>
+                    dest.Precio,
+                    opt => opt.MapFrom(src => src.HistoricoPrecio.Where(x => x.FechaVigencia <= DateTime.Now).OrderByDescending(x => x.FechaVigencia).FirstOrDefault().Valor));
         }
     }
 }
