@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Texere.DataAccess;
 using Texere.Model;
 using Texere.Service.Interfaces;
@@ -66,6 +65,10 @@ namespace Texere.Service
         {
             try
             {
+                model.EstadoId = 1;
+                foreach (LineasPedido lp in model.LineasPedido)
+                    lp.EstadoId = 1;
+
                 _texereDbContext.Add(model);
                 _texereDbContext.SaveChanges();
             }

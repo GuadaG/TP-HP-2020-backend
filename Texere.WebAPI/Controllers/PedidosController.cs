@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Texere.Model;
 using Texere.Service.Interfaces;
 using Texere.WebAPI.DTOs;
 
@@ -60,6 +58,16 @@ namespace Texere.WebAPI.Controllers
                 item.Total = CalcularTotal(item.PedidoId, item.Fecha);
             }
             return Ok(lista);
+        }
+
+        [HttpPost]
+        public IActionResult Add([FromBody] Pedidos model)
+        {
+
+            if (_pedidosService.Add(model))
+                return Ok();
+            else
+                return StatusCode(500);
         }
 
         private float CalcularTotal(int pedidoId, DateTime fecha)
