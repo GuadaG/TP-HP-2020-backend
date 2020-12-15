@@ -25,7 +25,7 @@ namespace Texere.WebAPI.Controllers
             var lista = _estadosService.GetAll();
             if (lista == null)
             {
-                return NotFound();
+                return NotFound("Error al intentar recuperar la lista de Estados");
             }
             return Ok(lista);
         }

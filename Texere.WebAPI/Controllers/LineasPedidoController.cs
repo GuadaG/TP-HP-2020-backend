@@ -5,6 +5,7 @@ using Texere.Service.Interfaces;
 using AutoMapper;
 using System.Collections.Generic;
 using Texere.WebAPI.DTOs;
+using Texere.Model;
 
 namespace Texere.WebAPI.Controllers
 {
@@ -35,7 +36,7 @@ namespace Texere.WebAPI.Controllers
             var lista = _mapper.Map<IEnumerable<LineasPedidoDTO>>(_lineaPedidoService.GetAll(pedidoId));           
             if (lista == null)
             {
-                return NotFound();
+                return NotFound("Error al intentar recuperar el detalle del Pedido");
             }
             foreach (var item in lista)
             {
@@ -45,6 +46,36 @@ namespace Texere.WebAPI.Controllers
             }
             return Ok(lista);
         }
+
+        [HttpPost]
+        public IActionResult Add([FromBody] LineasPedido model)
+        {
+            return Ok(
+                _lineaPedidoService.Add(model)
+            );
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody] LineasPedidoDTO model)
+        {
+            LineasPedido item = _lineaPedidoService.Get(id);
+            if (item == null)
+            {
+                return NotFound(String.Format("Error - No se pudo encontrar el elemento con ID {0}", id));
+            }
+            item.EstadoId = model.Estado;
+            try
+            {
+                _lineaPedidoService.Update(item);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(String.Format("Error - Ha ocurrido la siguiente excepción: {0}", ex.Message));
+            }
+
+            return NoContent();
+        }
+
 
         private float GetTotal(int pedidoId, LineasPedidoDTO item)
         {

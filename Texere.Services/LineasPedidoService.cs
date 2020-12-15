@@ -44,15 +44,10 @@ namespace Texere.Service
 
         public LineasPedido Get(int id)
         {
-            var result = new LineasPedido();
-
-            try
+            LineasPedido result = _texereDbContext.LineasPedido.Where(x => x.LineaPedidoId == id).FirstOrDefault();
+            if (result == null)
             {
-                result = _texereDbContext.LineasPedido.Single(x => x.LineaPedidoId == id);
-            }
-            catch (Exception)
-            {
-
+                throw new Exception(string.Format("{0} - Linea de pedido no encontrada", System.Net.HttpStatusCode.NotFound));
             }
 
             return result;
@@ -62,6 +57,7 @@ namespace Texere.Service
         {
             try
             {
+                model.EstadoId = (int)EstadosEnum.Pendiente;
                 _texereDbContext.Add(model);
                 _texereDbContext.SaveChanges();
             }
@@ -73,20 +69,13 @@ namespace Texere.Service
             return true;
         }
 
-        public bool Update(LineasPedido model)
+        public bool Update(LineasPedido updatedModel)
         {
             try
             {
-                var originalModel = _texereDbContext.LineasPedido.Single(x =>
-                    x.LineaPedidoId == model.LineaPedidoId
-                );
-
-                originalModel.Cantidad = model.Cantidad;
-                originalModel.Observaciones = model.Observaciones;
-                originalModel.Estado = model.Estado;
-
-                _texereDbContext.Update(originalModel);
+                _texereDbContext.Update(updatedModel);
                 _texereDbContext.SaveChanges();
+                UpdatePedido(updatedModel);
             }
             catch (Exception)
             {
@@ -104,6 +93,59 @@ namespace Texere.Service
                 _texereDbContext.SaveChanges();
             }
             catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void UpdatePedido(LineasPedido updatedModel)
+        {
+            Pedidos pedido = _texereDbContext.Pedidos.Where(p => p.PedidoId == updatedModel.PedidoId)
+                .Include(p => p.LineasPedido)
+                .FirstOrDefault();
+
+            switch (updatedModel.EstadoId)
+            {
+                case (int)EstadosEnum.Pendiente:
+                {
+                    if (pedido.LineasPedido.All(lp => lp.EstadoId == (int)EstadosEnum.Pendiente))
+                        ActualizarPedido(pedido, (int)EstadosEnum.Pendiente);
+                    break;
+                }
+                case (int)EstadosEnum.EnCurso:
+                {
+                    ActualizarPedido(pedido, (int)EstadosEnum.EnCurso);
+                    break;
+                }
+                case (int)EstadosEnum.Finalizado:
+                {
+                    if (pedido.LineasPedido.All(lp => lp.EstadoId == (int)EstadosEnum.Finalizado))
+                        ActualizarPedido(pedido, (int)EstadosEnum.Finalizado);
+                    break;
+                }
+                case (int)EstadosEnum.Cancelado:
+                {
+                    if (pedido.LineasPedido.All(lp => lp.EstadoId == (int)EstadosEnum.Cancelado))
+                        ActualizarPedido(pedido, (int)EstadosEnum.Cancelado);
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+
+        private bool ActualizarPedido(Pedidos pedido, int estadoId)
+        {
+            try
+            {
+                pedido.EstadoId = estadoId;
+
+                _texereDbContext.Update(pedido);
+                _texereDbContext.SaveChanges();
+            }
+            catch
             {
                 return false;
             }

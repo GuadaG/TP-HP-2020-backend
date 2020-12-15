@@ -11,5 +11,7 @@ namespace Texere.Model
 
         public int ModeloId { get; set; }
         public virtual Modelos Modelos { get; set; }
+
+        public int Orden { get; set; }
     }
 }

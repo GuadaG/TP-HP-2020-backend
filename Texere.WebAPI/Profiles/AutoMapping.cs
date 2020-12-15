@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Texere.Model;
 using Texere.WebAPI.DTOs;
@@ -43,31 +41,20 @@ namespace Texere.WebAPI
                     dest.PedidoId,
                     opt => opt.MapFrom(src => src.PedidoId))
                 .ForMember(dest =>
+                    dest.EstadoId,
+                    opt => opt.MapFrom(src => src.Estado.EstadoId))
+                .ForMember(dest =>
                     dest.Estado,
                     opt => opt.MapFrom(src => src.Estado.Descripcion))
                 .ForMember(dest =>
                     dest.Fecha,
-                    opt => opt.MapFrom(src => src.Fecha));
-
-            CreateMap<Modelos, ModelosDTO>()
+                    opt => opt.MapFrom(src => src.Fecha))
                 .ForMember(dest =>
-                    dest.ModeloId,
-                    opt => opt.MapFrom(src => src.ModeloId))
+                    dest.ClienteDni,
+                    opt => opt.MapFrom(src => src.Cliente.DniCuit))
                 .ForMember(dest =>
-                    dest.DescModelo,
-                    opt => opt.MapFrom(src => src.DescModelo))
-                .ForMember(dest =>
-                    dest.Imagen,
-                    opt => opt.MapFrom(src => src.Imagen))
-                .ForMember(dest =>
-                    dest.ColorBaseId,
-                    opt => opt.MapFrom(src => src.ColorBaseId))
-                .ForMember(dest =>
-                    dest.Instituciones,
-                    opt => opt.MapFrom(src => src.Instituciones.Select(i => i.InstitucionId)))
-                .ForMember(dest =>
-                    dest.Colores,
-                    opt => opt.MapFrom(src => src.ColoresModelos.Select(i => i.ColorId)));
+                    dest.ClienteNombre,
+                    opt => opt.MapFrom(src => src.Cliente.NombreApellido));
 
             CreateMap<Accesorios, AccesoriosDTO>()
                 .ForMember(dest =>
@@ -82,6 +69,43 @@ namespace Texere.WebAPI
                 .ForMember(dest =>
                     dest.Precio,
                     opt => opt.MapFrom(src => src.HistoricoPrecio.Where(x => x.FechaVigencia <= DateTime.Now).OrderByDescending(x => x.FechaVigencia).FirstOrDefault().Valor));
+
+            CreateMap<Instituciones, InstitucionesDTO>()
+                .ForMember(dest =>
+                    dest.InstitucionId,
+                    opt => opt.MapFrom(src => src.InstitucionId))
+                .ForMember(dest =>
+                    dest.DescInstitucion,
+                    opt => opt.MapFrom(src => src.Descripcion))
+                .ForMember(dest =>
+                    dest.DescModelo,
+                    opt => opt.MapFrom(src => src.Modelo.DescModelo))
+                .ForMember(dest =>
+                    dest.Imagen,
+                    opt => opt.MapFrom(src => src.Modelo.Imagen))
+                .ForMember(dest =>
+                    dest.ModeloId,
+                    opt => opt.MapFrom(src => src.ModeloId));
+
+            CreateMap<Modelos, ModelosDTO>()
+                .ForMember(dest =>
+                    dest.ModeloId,
+                    opt => opt.MapFrom(src => src.ModeloId))
+                .ForMember(dest =>
+                    dest.DescModelo,
+                    opt => opt.MapFrom(src => src.DescModelo))
+                .ForMember(dest =>
+                    dest.ImagenByte,
+                    opt => opt.MapFrom(src => src.Imagen))
+                .ForMember(dest =>
+                    dest.ColorBaseId,
+                    opt => opt.MapFrom(src => src.ColorBaseId))
+                .ForMember(dest =>
+                    dest.Instituciones,
+                    opt => opt.MapFrom(src => src.Instituciones.Select(i => i.InstitucionId)))
+                .ForMember(dest =>
+                    dest.Colores,
+                    opt => opt.MapFrom(src => src.ColoresModelos.Select(i => i.ColorId)));
         }
     }
 }

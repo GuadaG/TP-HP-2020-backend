@@ -14,4 +14,12 @@ namespace Texere.Model
         public virtual ICollection<Pedidos> Pedidos { get; set; }
         public virtual ICollection<LineasPedido> LineasPedido { get; set; }
     }
+
+    public enum EstadosEnum
+    {
+        Pendiente = 1,
+        EnCurso = 2,
+        Finalizado = 3,
+        Cancelado = 4
+    }
 }

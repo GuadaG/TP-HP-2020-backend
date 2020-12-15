@@ -7,8 +7,9 @@ namespace Texere.WebAPI.DTOs
         public int ModeloId { get; set; }
         public string DescModelo { get; set; }
         public string Imagen { get; set; }
+        public byte[] ImagenByte { get; set; }
         public int ColorBaseId { get; set; }
-        public List<int> Instituciones { get; set; }
         public List<int> Colores { get; set; }
+        public List<int> Instituciones { get; set; }
     }
 }
